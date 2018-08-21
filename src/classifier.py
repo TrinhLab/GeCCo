@@ -93,7 +93,7 @@ def classify(cdf, param_dict):
                     gclass = 'no_change'
 
             else:
-                if r.FC_t2:
+                if r.FC_t2 < -fc_cutoff:
                     if r.FC_t1 < -fc_cutoff:
                         gclass = 'lowly_expressed_gene'
                     else:
