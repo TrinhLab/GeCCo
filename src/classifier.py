@@ -86,6 +86,22 @@ def classify(cdf, param_dict):
     for idx, r in cdf.iterrows():
         gclass=''
         if (-z_cutoff < r.Z) and (r.Z < z_cutoff):
+            if r.FC_t2 > fc_cutoff:
+                if r.FC_t1 > fc_cutoff:
+                    gclass = 'highly_expressed_gene'
+                else:
+                    gclass = 'no_change'
+
+            else:
+                if r.FC_t2:
+                    if r.FC_t1 < -fc_cutoff:
+                        gclass = 'lowly_expressed_gene'
+                    else:
+                        gclass = 'no_change'
+                else:
+                    gclass = 'no_change'
+
+        else:
             if r.Z > z_cutoff:
                 if r.FC_t2 > fc_cutoff:
                     if r.FC_t1 > -fc_cutoff:
@@ -102,21 +118,6 @@ def classify(cdf, param_dict):
                         gclass = 'changed_regulation'
                 else:
                     gclass = 'changed_regulation'
-        else:
-            if r.FC_t2 > fc_cutoff:
-                if r.FC_t1 > fc_cutoff:
-                    gclass = 'highly_expressed_gene'
-                else:
-                    gclass = 'no_change'
-
-            else:
-                if r.FC_t2:
-                    if r.FC_t1 < -fc_cutoff:
-                        gclass = 'lowly_expressed_gene'
-                    else:
-                        gclass = 'no_change'
-                else:
-                    gclass = 'no_change'
 
         classified_df.loc[idx, 'Class'] = gclass
     return classified_df
