@@ -1,5 +1,5 @@
 param_id,value
-z_cutoff,2
+z_cutoff,1.5
 fc_cutoff,1
 correlation_type,pearson
 correlation_cutoff,0.85
