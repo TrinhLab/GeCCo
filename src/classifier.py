@@ -83,6 +83,24 @@ def classify(cdf, param_dict):
     z_cutoff = float(param_dict['z_cutoff'])
     fc_cutoff = float(param_dict['fc_cutoff'])
 
+    # Repeated subtree
+    def change_reg_subtree(r):
+        if r.FC_t2 > fc_cutoff:
+            if r.FC_t1 > fc_cutoff:
+                gclass = 'highly_expressed'
+            else:
+                gclass = 'changed_regulation'
+        else:
+            if r.FC_t2 < -fc_cutoff:
+                if r.FC_t1 < -fc_cutoff:
+                    gclass = 'lowly_expressed_gene'
+                else:
+                    gclass = 'changed_regulation'
+            else:
+                gclass = 'changed_regulation'
+        return gclass
+
+    # Main tree
     for idx, r in cdf.iterrows():
         gclass=''
         if (-z_cutoff < r.Z) and (r.Z < z_cutoff):
@@ -107,17 +125,17 @@ def classify(cdf, param_dict):
                     if r.FC_t1 > -fc_cutoff:
                         gclass = 'upregulated'
                     else:
-                        gclass = 'changed_regulation'
+                        gclass = change_reg_subtree(r)
                 else:
-                    gclass = 'changed_regulation'
+                    gclass = change_reg_subtree(r)
             else:
                 if r.FC_t2 < -fc_cutoff:
                     if r.FC_t1 < fc_cutoff:
-                        gclass='downregulated'
+                        gclass = 'downregulated'
                     else:
-                        gclass = 'changed_regulation'
+                        gclass = change_reg_subtree(r)
                 else:
-                    gclass = 'changed_regulation'
+                    gclass = change_reg_subtree(r)
 
         classified_df.loc[idx, 'Class'] = gclass
     return classified_df
