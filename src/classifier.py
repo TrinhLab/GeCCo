@@ -4,16 +4,25 @@ import re
 
 # Load parameters
 
-def find_classes(tpm_file_path, param_file_path):
+def find_classes(tpm_file_path, param_file_path, remove_no_change=True):
+    """ Assign classes to each gene based on decision tree.
+    :param tpm_file_path: Path to csv file formated for gec.
+    :param param_file_path: Path to parameter file.
+    :param remove_no_change: If true removes genes classified as no_change from the output (Default is True).
+    :return: classified_df, cdf. Where classified_df contains gene ids and their associated categories and cdf contains the classificaiton variables (z-scores, and fold changes)
+    """
+
     tpm, sample_groups = parse_input(tpm_file_path)
     prm = pd.read_csv(param_file_path)
     param_dict = dict(zip(prm['param_id'], prm['value'].apply(to_numeric)))
     cdf = calc_classification_variables(tpm, sample_groups, param_dict)
     classified_df = classify(cdf, param_dict)
+    if remove_no_change:
+        classified_df = classified_df[classified_df['Class'].str.contains("no_change") == False]
     return classified_df, cdf
 
 def to_numeric(x):
-    """ Convert values to float type and leave strings alone"""
+    """ Convert numeric values to float type and leave strings alone"""
     try:
         return float(x)
     except:
@@ -93,7 +102,7 @@ def classify(cdf, param_dict):
         else:
             if r.FC_t2 < -fc_cutoff:
                 if r.FC_t1 < -fc_cutoff:
-                    gclass = 'lowly_expressed_gene'
+                    gclass = 'lowly_expressed'
                 else:
                     gclass = 'changed_regulation'
             else:
@@ -106,14 +115,14 @@ def classify(cdf, param_dict):
         if (-z_cutoff < r.Z) and (r.Z < z_cutoff):
             if r.FC_t2 > fc_cutoff:
                 if r.FC_t1 > fc_cutoff:
-                    gclass = 'highly_expressed_gene'
+                    gclass = 'highly_expressed'
                 else:
                     gclass = 'no_change'
 
             else:
                 if r.FC_t2 < -fc_cutoff:
                     if r.FC_t1 < -fc_cutoff:
-                        gclass = 'lowly_expressed_gene'
+                        gclass = 'lowly_expressed'
                     else:
                         gclass = 'no_change'
                 else:
