@@ -1,0 +1,6 @@
+class,color
+changed_regulation,green
+lowly_expressed,lightblue
+highly_expressed,orange
+upregulated,red
+downregulated,darkblue
