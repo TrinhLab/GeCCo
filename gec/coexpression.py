@@ -58,10 +58,10 @@ def add_node_visualization_attributes(g, param_dir=gec.settings.DEFAULT_V_PARAM_
             g.node[node_id]['shape'] = shape_d['otherwise']
             g.node[node_id]['size'] = size_d['otherwise']
             g.node[node_id]['border'] = border_d['otherwise']
-       else:
-           g.node[node_id]['shape'] = shape_d[data['feature']]
-           g.node[node_id]['size'] = size_d['has_feature']
-           g.node[node_id]['border'] = border_d['has_feature']
+        else:
+            g.node[node_id]['shape'] = shape_d[data['feature']]
+            g.node[node_id]['size'] = size_d['has_feature']
+            g.node[node_id]['border'] = border_d['has_feature']
 
 
 def split_g(g):
