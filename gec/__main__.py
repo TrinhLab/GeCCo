@@ -32,7 +32,7 @@ def cli(args_=None):
     parser.add_argument('--write_scores', choices=['false','true'], help='Writes folds changes and Z-scores to a file names scores.csv in the problem directory', default=d_write_scores)
     parser.add_argument('-v','--verbose_level', choices=[0,1,2], default=d_verbose_level,
                     help='Verbose options: 0, remove all output; 1, basic output (default); 2, most descriptive output')
-    parser.add_argument('--network_file_path', help='If provided, coexpression analysis is performed.', default=d_network_file_path)
+    parser.add_argument('-n', '--network_file_path', help='If provided, coexpression analysis is performed.', default=d_network_file_path)
     args = parser.parse_args(args_)
     core(**vars(args))
 
