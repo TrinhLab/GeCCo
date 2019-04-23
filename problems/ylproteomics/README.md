@@ -8,4 +8,7 @@ The raw file with all samples is `input_for_proteomics2.csv`, the following case
    2.   P3_00 (up) vs. P3_400 (down)
 12h = time point 1
 16h = time point 2
-Header labels:  Strain_[thiamine]_time_replicate
+Header labels:  Strain_[thiamine concentration]_time_replicate
+
+# Other
+Since this proteomics data has already been processed flooring and log transformation is not performed (this is indicated in param.csv)

@@ -1,0 +1,10 @@
+param_id,value
+log_floor,1
+min_var,0.00001
+corr_type,pearson
+min_cutoff,0.65
+max_cutoff,0.95
+npoints,30
+min_der,0.5
+pol_order,3
+fixed_cutoff,0.7
