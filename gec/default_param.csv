@@ -4,4 +4,5 @@ fc_cutoff,1
 correlation_type,pearson
 correlation_cutoff,0.85
 seudovariance,0.25
+floor_and_logtransform,true
 min_tpm,5

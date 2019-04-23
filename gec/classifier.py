@@ -56,10 +56,11 @@ def check_format(tpm):
 def calc_classification_variables(tpm, sample_groups, param_dict):
     """ Calculate z-scores and fold changes, output in a new table"""
     seudovar = param_dict['seudovariance']
-    min_tpm = param_dict['min_tpm']
-    # Replace tpm  by minimum relevant value and convert tpm to log2
-    tpm[tpm < min_tpm] = min_tpm
-    tpm = np.log2(tpm)
+    if param_dict['floor_and_logtransform'].lower() == 'true':
+        min_tpm = param_dict['min_tpm']
+        # Replace tpm  by minimum relevant value and convert tpm to log2
+        tpm[tpm < min_tpm] = min_tpm
+        tpm = np.log2(tpm)
 
     # Calc means and variance/n
     calcdf = pd.DataFrame(index=tpm.index)
