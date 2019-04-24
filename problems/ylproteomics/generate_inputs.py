@@ -16,9 +16,6 @@ import os
 
 df = pd.read_csv('./input_for_proteomics2.csv')
 
-# Remove underscores in gene ids:
-df['Gene'] = df['Gene'].map(lambda x: x.replace('_',''))
-
 def create_input(wt, mut):
     df1 = df.filter(regex='Gene|{}|{}'.format(wt,mut))
     df1 = df1.rename(columns=lambda x: re.sub('{}_12_0([0-9])'.format(wt),r'WT_t1_rep\1',x))

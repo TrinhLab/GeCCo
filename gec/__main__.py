@@ -19,6 +19,7 @@ d_parameters_path = settings.DEFAULT_PARAMETERS
 d_write_scores = 'false'
 d_verbose_level = 1
 d_network_file_path = None
+d_calc_centrality = 'true'
 
 # Command line interface
 def cli(args_=None):
@@ -33,12 +34,13 @@ def cli(args_=None):
     parser.add_argument('-v','--verbose_level', choices=[0,1,2], default=d_verbose_level,
                     help='Verbose options: 0, remove all output; 1, basic output (default); 2, most descriptive output')
     parser.add_argument('-n', '--network_file_path', help='If provided, coexpression analysis is performed.', default=d_network_file_path)
+    parser.add_argument('-c','--calc_centrality', choices=['false','true'], help='Determines if centrality metrics are calcualted, can be slow for large graphs', default=d_calc_centrality)
     args = parser.parse_args(args_)
     core(**vars(args))
 
 
 # core method
-def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_scores,network_file_path=d_network_file_path, verbose_level=d_verbose_level):
+def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_scores,network_file_path=d_network_file_path, calc_centrality=d_calc_centrality, verbose_level=d_verbose_level):
     # Default paths
     input_dir = os.path.join(problem_dir,'input')
 
@@ -80,7 +82,8 @@ def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_sc
             print('Coexpression network analysis in progress...', end='')
 
         classified_subgraph = get_classified_subgraph(network_file_path, classified_df)
-        add_centrality_metrics(classified_subgraph)
+        if calc_centrality.lower() == 'true':
+            add_centrality_metrics(classified_subgraph)
 
         # Add formatting features to node attribute file for simpler cytoscape usage
         add_node_visualization_attributes(classified_subgraph)
