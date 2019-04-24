@@ -1,1 +1,1 @@
-A fixed cutoff of 0.7 is used since scale-free criterion does not seem to apply (see cutoff_scan.svg)
+A fixed cutoff of 0.8 is used  based on the cut-off scan (see cutoff_scan.svg)
