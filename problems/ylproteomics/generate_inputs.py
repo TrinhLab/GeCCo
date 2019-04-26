@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
 # Create inputs for the following cases:
-#   1.   P3_00 (up) vs. WT_00 (down)
-#   2.   WT_00 (up) vs. WT_400 (down)
-#   2.   P3_00 (up) vs. P3_400 (down)
+# Currentely these are expressed as control vs case
+#   1.   P3_00 vs. WT_00
+#   2.   WT_00 vs. WT_400
+#   2.   P3_00 vs. P3_400
 #12h = time point 1
 #16h = time point 2
 #Samples:  Strain_[thiamine]_time_replicate
