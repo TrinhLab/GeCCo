@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Create inputs for the following cases:
-# Currentely these are expressed as control vs case
+# Currentely these are expressed as case (MT) vs control (WT)
 #   1.   P3_00 vs. WT_00
 #   2.   WT_00 vs. WT_400
 #   2.   P3_00 vs. P3_400
@@ -17,13 +17,13 @@ import os
 
 df = pd.read_csv('./input_for_proteomics2.csv')
 
-def create_input(wt, mut):
+def create_input(mut, wt):
     df1 = df.filter(regex='Gene|{}|{}'.format(wt,mut))
     df1 = df1.rename(columns=lambda x: re.sub('{}_12_0([0-9])'.format(wt),r'WT_t1_rep\1',x))
     df1 = df1.rename(columns=lambda x: re.sub('{}_16_0([0-9])'.format(wt),r'WT_t2_rep\1',x))
     df1 = df1.rename(columns=lambda x: re.sub('{}_12_0([0-9])'.format(mut),r'MT_t1_rep\1',x))
     df1 = df1.rename(columns=lambda x: re.sub('{}_16_0([0-9])'.format(mut),r'MT_t2_rep\1',x))
-    dirname =  '{}vs{}/input'.format(wt,mut)
+    dirname =  '{}vs{}/input'.format(mut, wt)
     if not os.path.exists(dirname):
         os.makedirs(dirname)
     df1.to_csv('./{}/tpm.csv'.format(dirname), index=False)
