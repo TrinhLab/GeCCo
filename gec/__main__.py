@@ -58,6 +58,7 @@ def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_sc
         gf = pd.read_csv(gf_path)
         gf = gf.set_index('Gene')
         classified_df = classified_df.join(gf)
+        rename_classes(classified_df)
         if verbose_level >= 1:
             print('Gene features included')
     else:
@@ -115,6 +116,20 @@ def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_sc
         cdf.to_csv(scores_output_path)
         if verbose_level >=1:
             print('\t', scores_output_path)
+
+
+def rename_classes(classified_df):
+    """ More precise nomenclature that is easier to understand
+    """
+    old2new = {
+             "highly_expressed"   : "control_overexpressed",
+             "lowly_expressed"    : "case_overexpressed",
+             "upregulated"        : "control_upregulated",
+             "downregulated"      : "case_upregulated",
+             "changed_regulation" : "changed_regulation",
+             "no_change"          : "no_change"
+             }
+    classified_df["Class"].replace(old2new, inplace=True)
 
 
 if __name__ == "__main__":

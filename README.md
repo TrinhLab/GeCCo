@@ -4,12 +4,12 @@
 (TODO:expand on this explanation)
 
 GEC serves to analyze omics data between two conditions or time points. Such comparison is referred to as case vs control. GEC will determine genes or proteins that fall under different categories:
-- highly-expressed
-- lowly-expressed
-- up-regulated
-- down-regulated
-- changed-regulation
-- no-change
+- control_overexpressed (highly-expressed)
+- case_overexpressed (lowly-expressed)
+- control_upregulated (up-regulated)
+- case_upregulated (down-regulated)
+- changed_regulation
+- no_change
 Additionally, GEC will perform network co-expression analysis and produce several files ready for analysis in [Cytoscape](https://cytoscape.org/).
 
 ## Preliminary notes

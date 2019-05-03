@@ -1,6 +1,6 @@
 class,color
 changed_regulation,green
-lowly_expressed,lightblue
-highly_expressed,orange
-upregulated,red
-downregulated,darkblue
+case_overexpressed,lightblue
+control_overexpressed,orange
+control_upregulated,red
+case_upregulated,darkblue
