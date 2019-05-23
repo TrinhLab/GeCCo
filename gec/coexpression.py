@@ -75,8 +75,8 @@ def split_g(g):
     g : networkx.Graph
     """
 
-    pos_nodes = [x for x,y in g.nodes(data=True) if y['class'] in ['upregulated', 'highly_expressed']]
-    neg_nodes = [x for x,y in g.nodes(data=True) if y['class'] in ['downregulated', 'lowly_expressed']]
+    pos_nodes = [x for x,y in g.nodes(data=True) if y['class'] in ['control_upregulated', 'control_overexpressed']]
+    neg_nodes = [x for x,y in g.nodes(data=True) if y['class'] in ['case_upregulated', 'case_overexpressed']]
     p_g = nx.subgraph(g, pos_nodes)
     n_g = nx.subgraph(g, neg_nodes)
     return p_g, n_g
