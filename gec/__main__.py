@@ -16,10 +16,11 @@ import networkx as nx
 
 # Default parameters
 d_parameters_path = settings.DEFAULT_PARAMETERS
-d_write_scores = 'false'
+d_write_scores = False
 d_verbose_level = 1
 d_network_file_path = None
-d_calc_centrality = 'true'
+d_calc_centrality = True
+d_include_no_change = False
 
 # Command line interface
 def cli(args_=None):
@@ -27,20 +28,22 @@ def cli(args_=None):
         args_ = sys.argv[1:]
 
     # Parse input
-    parser = argparse.ArgumentParser(description='Gene Expression Classifier (GEC)')
+    parser = argparse.ArgumentParser(description='Gene Expression Classifier (GEC)', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('problem_dir', help='Path to problem directory')
     parser.add_argument('-p','--parameters_path', help='Path to .csv parameter file', required=False, default=d_parameters_path)
-    parser.add_argument('--write_scores', choices=['false','true'], help='Writes folds changes and Z-scores to a file names scores.csv in the problem directory', default=d_write_scores)
+    parser.add_argument('--write_scores', help='Writes folds changes and Z-scores to a file names scores.csv in the problem directory', default=d_write_scores, choices=[True, False], type=lambda x: (str(x).lower() == 'true'))
     parser.add_argument('-v','--verbose_level', choices=[0,1,2], default=d_verbose_level,
                     help='Verbose options: 0, remove all output; 1, basic output (default); 2, most descriptive output')
     parser.add_argument('-n', '--network_file_path', help='If provided, coexpression analysis is performed.', default=d_network_file_path)
-    parser.add_argument('-c','--calc_centrality', choices=['false','true'], help='Determines if centrality metrics are calcualted, can be slow for large graphs', default=d_calc_centrality)
+    parser.add_argument('-c','--calc_centrality', help='Determines if centrality metrics are calcualted, can be slow for large graphs', default=d_calc_centrality, choices=[True, False], type=lambda x: (str(x).lower() == 'true'))
+    parser.add_argument('--include_no_change',  help='Includes genes in the "no_change" category as part of the output' , default=d_include_no_change, choices=[True, False], type=lambda x: (str(x).lower() == 'true'))
+
     args = parser.parse_args(args_)
     core(**vars(args))
 
 
 # core method
-def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_scores,network_file_path=d_network_file_path, calc_centrality=d_calc_centrality, verbose_level=d_verbose_level):
+def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_scores,network_file_path=d_network_file_path, calc_centrality=d_calc_centrality, verbose_level=d_verbose_level, include_no_change=d_include_no_change):
     # Default paths
     input_dir = os.path.join(problem_dir,'input')
 
@@ -48,7 +51,7 @@ def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_sc
     if verbose_level >= 1:
         print('Classifying genes...', end='')
     tpm_file_path = os.path.join(input_dir, 'tpm.csv')
-    classified_df, cdf = find_classes(tpm_file_path, param_file_path=parameters_path)
+    classified_df, cdf = find_classes(tpm_file_path, param_file_path=parameters_path, remove_no_change=(not include_no_change))
     if verbose_level >= 1:
         print('Done')
 
@@ -83,7 +86,7 @@ def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_sc
             print('Coexpression network analysis in progress...', end='')
 
         classified_subgraph = get_classified_subgraph(network_file_path, classified_df)
-        if calc_centrality.lower() == 'true':
+        if calc_centrality == True:
             add_centrality_metrics(classified_subgraph)
 
         # Add formatting features to node attribute file for simpler cytoscape usage
@@ -111,7 +114,7 @@ def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_sc
             print('\t', neg_output_path)
 
     # Write  scores
-    if write_scores == 'true':
+    if write_scores == True:
         scores_output_path = os.path.abspath(os.path.join(problem_dir, 'scores.csv'))
         cdf.to_csv(scores_output_path)
         if verbose_level >=1:
