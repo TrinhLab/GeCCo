@@ -126,10 +126,10 @@ def rename_classes(classified_df):
     """ More precise nomenclature that is easier to understand
     """
     old2new = {
-             "highly_expressed"   : "control_overexpressed",
-             "lowly_expressed"    : "case_overexpressed",
-             "upregulated"        : "control_upregulated",
-             "downregulated"      : "case_upregulated",
+             "highly_expressed"   : "case_overexpressed",
+             "lowly_expressed"    : "control_overexpressed",
+             "upregulated"        : "case_upregulated",
+             "downregulated"      : "control_upregulated",
              "changed_regulation" : "changed_regulation",
              "no_change"          : "no_change"
              }

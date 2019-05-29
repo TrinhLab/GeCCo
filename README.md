@@ -4,6 +4,7 @@
 (TODO:expand on this explanation)
 
 GEC serves to analyze omics data between two conditions or time points. Such comparison is referred to as case vs control. GEC will determine genes or proteins that fall under different categories:
+(TODO: This mapping is outdated see `renmane_classes(classified_df)` in `__main__.py`
 - control_overexpressed (highly-expressed)
 - case_overexpressed (lowly-expressed)
 - control_upregulated (up-regulated)
