@@ -116,7 +116,8 @@ def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_sc
     # Write  scores
     if write_scores == True:
         scores_output_path = os.path.abspath(os.path.join(problem_dir, 'scores.csv'))
-        cdf.to_csv(scores_output_path)
+        out_scores_df = cdf.join(classified_df)
+        out_scores_df.to_csv(scores_output_path)
         if verbose_level >=1:
             print('\t', scores_output_path)
 
