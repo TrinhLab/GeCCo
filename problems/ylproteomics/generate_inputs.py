@@ -31,3 +31,4 @@ def create_input(mut, wt):
 create_input('P3_00', 'WT_00')
 create_input('WT_00', 'WT_400')
 create_input('P3_00', 'P3_400')
+create_input('P3_400', 'WT_400')
