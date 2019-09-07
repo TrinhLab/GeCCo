@@ -4,17 +4,15 @@ import re
 
 # Load parameters
 
-def find_classes(tpm_file_path, param_file_path, remove_no_change=True):
+def find_classes(tpm_file_path, param_dict, remove_no_change=True):
     """ Assign classes to each gene based on decision tree.
     :param tpm_file_path: Path to csv file formated for gec.
-    :param param_file_path: Path to parameter file.
+    :param param_dict: Paramter dictionary
     :param remove_no_change: If true removes genes classified as no_change from the output (Default is True).
     :return: classified_df, cdf. Where classified_df contains gene ids and their associated categories and cdf contains the classificaiton variables (z-scores, and fold changes)
     """
 
     tpm, sample_groups = parse_input(tpm_file_path)
-    prm = pd.read_csv(param_file_path)
-    param_dict = dict(zip(prm['param_id'], prm['value'].apply(to_numeric)))
     cdf = calc_classification_variables(tpm, sample_groups, param_dict)
     classified_df = classify(cdf, param_dict)
     if remove_no_change:
@@ -47,7 +45,7 @@ def check_format(tpm):
     """ Ensure the input format is correct
     WIP:
     - Check column labels
-    - Check that data is not in log2
+    - Check that if data is log2
     - ... """
     assert tpm.columns[0] == 'Gene', 'First column of tpm table must correspond to genes and be labeled \"Gene\"'
     return None
@@ -56,7 +54,7 @@ def check_format(tpm):
 def calc_classification_variables(tpm, sample_groups, param_dict):
     """ Calculate z-scores and fold changes, output in a new table"""
     seudovar = param_dict['seudovariance']
-    if param_dict['floor_and_logtransform'].lower() == 'true':
+    if param_dict['floor_and_logtransform']:
         min_tpm = param_dict['min_tpm']
         # Replace tpm  by minimum relevant value and convert tpm to log2
         tpm[tpm < min_tpm] = min_tpm

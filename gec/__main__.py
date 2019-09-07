@@ -6,7 +6,7 @@ Command line interface
 
 
 import argparse
-from gec.classifier import find_classes
+from gec.classifier import find_classes, to_numeric
 import gec.settings as settings
 from gec.coexpression import *
 import os
@@ -22,15 +22,16 @@ d_network_file_path = None
 d_calc_centrality = True
 d_include_no_change = False
 
-# Command line interface
 def cli(args_=None):
+    """
+    Command line interface
+    """
     if args_ is None:
         args_ = sys.argv[1:]
 
     # Parse input
     parser = argparse.ArgumentParser(description='Gene Expression Classifier (GEC)', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('problem_dir', help='Path to problem directory')
-    parser.add_argument('-p','--parameters_path', help='Path to .csv parameter file', required=False, default=d_parameters_path)
     parser.add_argument('--write_scores', help='Writes folds changes and Z-scores to a file names scores.csv in the problem directory', default=d_write_scores, choices=[True, False], type=lambda x: (str(x).lower() == 'true'))
     parser.add_argument('-v','--verbose_level', choices=[0,1,2], default=d_verbose_level,
                     help='Verbose options: 0, remove all output; 1, basic output (default); 2, most descriptive output')
@@ -38,20 +39,42 @@ def cli(args_=None):
     parser.add_argument('-c','--calc_centrality', help='Determines if centrality metrics are calcualted, can be slow for large graphs', default=d_calc_centrality, choices=[True, False], type=lambda x: (str(x).lower() == 'true'))
     parser.add_argument('--include_no_change',  help='Includes genes in the "no_change" category as part of the output' , default=d_include_no_change, choices=[True, False], type=lambda x: (str(x).lower() == 'true'))
 
-    args = parser.parse_args(args_)
-    core(**vars(args))
+    parser.add_argument('-p','--parameters_path', help='Path to .csv parameter file. LEGACY: Paramter input through command line is recommended instead of parameter file. However, if a parameter file is provided this will take precedence over command line versions', required=False, default=d_parameters_path)
+    # Command line paramters also present in parameter file:
+    parser.add_argument('--z_cutoff',  help='wip' , default=1.5, type=float)
+    parser.add_argument('--fc_cutoff',  help='wip' , default=1, type=float)
+    parser.add_argument('--correlation_type', choices=["pearson","spearman"], default="pearson", help='wip', type=str)
+    parser.add_argument('--correlation_cutoff', help='wip' , default=0.85, type=float)
+    parser.add_argument('--seudovariance', help='wip' , default=0.25, type=float)
+    parser.add_argument('--floor_and_logtransform',help='wip' , default=True, choices=[True, False], type=lambda x: (str(x).lower() == 'true'))
+    parser.add_argument('-mtp', '--min_tpm',help='Used for flooring (any value below this value will be set to this value)' , default=5, type=float)
 
+    args = parser.parse_args(args_)
+    core(args.problem_dir, parameters_path=args.parameters_path, write_scores=args.write_scores,network_file_path=args.network_file_path, calc_centrality=args.calc_centrality, verbose_level=args.verbose_level, include_no_change=args.include_no_change, cli_args=args)
+
+def load_params(parameters_path, cli_args):
+    """ Load parameters. Non-default parameter file superseed CLI parameters.
+    """
+    if parameters_path != d_parameters_path:
+        prm = pd.read_csv(param_file_path)
+        param_dict = dict(zip(prm['param_id'], prm['value'].apply(to_numeric)))
+        # Compatibility: (convert strings to logical)
+        param_dict['floor_and_logtransform'] = param_dict['floor_and_logtransform'].lower() == 'true'
+    else:
+        param_dict = vars(cli_args) # Some are not parameters but it does not hurt
+    return param_dict
 
 # core method
-def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_scores,network_file_path=d_network_file_path, calc_centrality=d_calc_centrality, verbose_level=d_verbose_level, include_no_change=d_include_no_change):
+def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_scores,network_file_path=d_network_file_path, calc_centrality=d_calc_centrality, verbose_level=d_verbose_level, include_no_change=d_include_no_change, cli_args=None):
     # Default paths
     input_dir = os.path.join(problem_dir,'input')
 
+    param_dict = load_params(parameters_path, cli_args)
     # Apply gec
     if verbose_level >= 1:
         print('Classifying genes...', end='')
     tpm_file_path = os.path.join(input_dir, 'tpm.csv')
-    classified_df, cdf = find_classes(tpm_file_path, param_file_path=parameters_path, remove_no_change=(not include_no_change))
+    classified_df, cdf = find_classes(tpm_file_path, param_dict=param_dict, remove_no_change=(not include_no_change))
     if verbose_level >= 1:
         print('Done')
 
@@ -114,7 +137,7 @@ def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_sc
             print('\t', neg_output_path)
 
     # Write  scores
-    if write_scores == True:
+    if write_scores:
         scores_output_path = os.path.abspath(os.path.join(problem_dir, 'scores.csv'))
         out_scores_df = cdf.join(classified_df)
         out_scores_df.to_csv(scores_output_path)
