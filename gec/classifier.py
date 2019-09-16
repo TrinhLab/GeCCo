@@ -33,11 +33,10 @@ def parse_input(tpm_file_path):
     check_format(tpm)
     tpm = tpm.set_index('Gene')
     # Identify replicate groups
-    no_rep_samples = list(set([re.sub('_rep\d$','',header) for header in  tpm.columns[1:]]))
+    no_rep_samples = list(set([re.sub('_rep\d$','',header) for header in  tpm.columns]))
     sample_groups = {}
     for sample_id in no_rep_samples:
         sample_groups[sample_id] = [h for h in tpm.columns if sample_id in h]
-
     return tpm, sample_groups
 
 
@@ -65,6 +64,8 @@ def calc_classification_variables(tpm, sample_groups, param_dict):
     for k, v in sample_groups.items():
         calcdf[k] = tpm[v].mean(axis=1)
         calcdf[k+'_vn'] = tpm[v].var(axis=1)/len(v) # variance divided by the number of samples
+    calcdf = calcdf.fillna(0) # e.g. variance for one sample = NaN
+
     calcdf['varsum_Z'] = calcdf.MT_t1_vn + calcdf.MT_t2_vn + calcdf.WT_t1_vn + calcdf.WT_t2_vn
     calcdf['varsum_fct1'] = calcdf.MT_t1_vn + calcdf.WT_t1_vn
     calcdf['varsum_fct2'] = calcdf.MT_t2_vn + calcdf.WT_t2_vn
@@ -91,61 +92,22 @@ def classify(cdf, param_dict):
     z_cutoff = float(param_dict['z_cutoff'])
     fc_cutoff = float(param_dict['fc_cutoff'])
 
-    # Repeated subtree
-    def change_reg_subtree(r):
-        if r.FC_t2 > fc_cutoff:
-            if r.FC_t1 > fc_cutoff:
-                gclass = 'highly_expressed'
-            else:
-                gclass = 'changed_regulation'
+    def class_map(r):
+        if (r.FC_t1 >= fc_cutoff) and (r.FC_t2 >= fc_cutoff):
+            return "highly_expressed" #aka case_overexpressed
+        elif (-fc_cutoff < r.FC_t1) and (r.FC_t1 < fc_cutoff) and (r.FC_t2 >= fc_cutoff):
+            return "upregulated" #aka case_upregulated
+        elif (r.FC_t1 <= -fc_cutoff) and (r.FC_t2 <= -fc_cutoff):
+            return "lowly_expressed" #aka control_overexpressed
+        elif (-fc_cutoff < r.FC_t1) and (r.FC_t1 < fc_cutoff) and (r.FC_t2 <= -fc_cutoff):
+            return "downregulated" #aka control_upregulated
+        elif abs(r.Z) > z_cutoff:
+            return "changed_regulation"
         else:
-            if r.FC_t2 < -fc_cutoff:
-                if r.FC_t1 < -fc_cutoff:
-                    gclass = 'lowly_expressed'
-                else:
-                    gclass = 'changed_regulation'
-            else:
-                gclass = 'changed_regulation'
-        return gclass
+            return "no_change"
 
-    # Main tree
-    for idx, r in cdf.iterrows():
-        gclass=''
-        if (-z_cutoff < r.Z) and (r.Z < z_cutoff):
-            if r.FC_t2 > fc_cutoff:
-                if r.FC_t1 > fc_cutoff:
-                    gclass = 'highly_expressed'
-                else:
-                    gclass = 'no_change'
+    classified_df['Class'] = cdf.apply(class_map, axis=1)
 
-            else:
-                if r.FC_t2 < -fc_cutoff:
-                    if r.FC_t1 < -fc_cutoff:
-                        gclass = 'lowly_expressed'
-                    else:
-                        gclass = 'no_change'
-                else:
-                    gclass = 'no_change'
-
-        else:
-            if r.Z > z_cutoff:
-                if r.FC_t2 > fc_cutoff:
-                    if r.FC_t1 > -fc_cutoff:
-                        gclass = 'upregulated'
-                    else:
-                        gclass = change_reg_subtree(r)
-                else:
-                    gclass = change_reg_subtree(r)
-            else:
-                if r.FC_t2 < -fc_cutoff:
-                    if r.FC_t1 < fc_cutoff:
-                        gclass = 'downregulated'
-                    else:
-                        gclass = change_reg_subtree(r)
-                else:
-                    gclass = change_reg_subtree(r)
-
-        classified_df.loc[idx, 'Class'] = gclass
     return classified_df
 
 

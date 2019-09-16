@@ -1,0 +1,10 @@
+Gene,WT_t1_rep1,WT_t2_rep1,MT_t1_rep1,MT_t2_rep1
+No_change,2,3,2,3
+Case_overexpressed,2,3,5,7
+Case_upregulated,2,2,2,5
+Control_overexpressed,5,7,2,3
+Control_upregulated,2,5,2,2
+Changed_regulation,5,3,2,7
+Changed_regulation,3,3,1,5
+Changed_regulation,3,3,5,1
+All_zeros,0,0,0,0

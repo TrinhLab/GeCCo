@@ -1,8 +1,0 @@
-param_id,value
-z_cutoff,1.5
-fc_cutoff,1
-correlation_type,pearson
-correlation_cutoff,0.85
-seudovariance,0.25
-floor_and_logtransform,false
-min_tpm,5

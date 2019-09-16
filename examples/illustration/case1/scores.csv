@@ -1,0 +1,16 @@
+Gene,FC_t1,FC_t2,Z,Class,Feature
+All_zeros,0.0,0.0,0.0,no_change,
+Case_overexpressed,6.0,8.0,2.0,case_overexpressed,important_regulator
+Case_upregulated,0.0,6.0,6.0,case_upregulated,
+Changed_regulation,-6.0,8.0,14.0,changed_regulation,
+Changed_regulation,-6.0,8.0,14.0,changed_regulation,
+Changed_regulation,-6.0,8.0,14.0,changed_regulation,
+Changed_regulation,-4.0,4.0,8.0,changed_regulation,
+Changed_regulation,-4.0,4.0,8.0,changed_regulation,
+Changed_regulation,-4.0,4.0,8.0,changed_regulation,
+Changed_regulation,4.0,-4.0,-8.0,changed_regulation,
+Changed_regulation,4.0,-4.0,-8.0,changed_regulation,
+Changed_regulation,4.0,-4.0,-8.0,changed_regulation,
+Control_overexpressed,-6.0,-8.0,-2.0,control_overexpressed,
+Control_upregulated,0.0,-6.0,-6.0,control_upregulated,
+No_change,0.0,0.0,0.0,no_change,

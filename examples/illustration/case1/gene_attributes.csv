@@ -1,0 +1,10 @@
+Gene,Class,Feature
+All_zeros,no_change,
+Case_overexpressed,case_overexpressed,important_regulator
+Case_upregulated,case_upregulated,
+Changed_regulation,changed_regulation,
+Changed_regulation,changed_regulation,
+Changed_regulation,changed_regulation,
+Control_overexpressed,control_overexpressed,
+Control_upregulated,control_upregulated,
+No_change,no_change,

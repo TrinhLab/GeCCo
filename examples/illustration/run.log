@@ -1,0 +1,6 @@
+Classifying genes...Done
+Gene features included
+Coexpression analysis not performed, only gene classification will be reported
+Output files written to:
+	 /home/sg/wrk/s/gec/examples/illustration/case1/gene_attributes.csv
+	 /home/sg/wrk/s/gec/examples/illustration/case1/scores.csv
