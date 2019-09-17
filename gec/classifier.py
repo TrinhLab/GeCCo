@@ -95,11 +95,11 @@ def classify(cdf, param_dict):
     def class_map(r):
         if (r.FC_t1 >= fc_cutoff) and (r.FC_t2 >= fc_cutoff):
             return "highly_expressed" #aka case_overexpressed
-        elif (-fc_cutoff < r.FC_t1) and (r.FC_t1 < fc_cutoff) and (r.FC_t2 >= fc_cutoff):
+        elif (-fc_cutoff < r.FC_t1) and (r.FC_t1 < fc_cutoff) and (r.FC_t2 >= fc_cutoff) and (r.Z >= z_cutoff):
             return "upregulated" #aka case_upregulated
         elif (r.FC_t1 <= -fc_cutoff) and (r.FC_t2 <= -fc_cutoff):
             return "lowly_expressed" #aka control_overexpressed
-        elif (-fc_cutoff < r.FC_t1) and (r.FC_t1 < fc_cutoff) and (r.FC_t2 <= -fc_cutoff):
+        elif (-fc_cutoff < r.FC_t1) and (r.FC_t1 < fc_cutoff) and (r.FC_t2 <= -fc_cutoff) and (r.Z <= -z_cutoff):
             return "downregulated" #aka control_upregulated
         elif abs(r.Z) > z_cutoff:
             return "changed_regulation"
