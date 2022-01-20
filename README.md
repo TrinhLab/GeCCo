@@ -19,6 +19,7 @@ GEC is a python program with a command line interface so that you can get things
 ## Installation
 1. Clone the repository or download the zip file.
 2. Install the python package: `pip install -e gec`
+3. Install the package dependencies: `pip install -r requirements.txt`
 
 ## Usage
 1. Create a _problem directory_ with the following files in an input subdirectory:
