@@ -1,9 +1,10 @@
-# Gene expression classifier (GEC)
+# Gene Coexpression Connectivity (GeCCo)
+# Note: GeCCo is previously named as Gene expression classifier (GEC)
 
-## What is GEC
+## What is GeCCo?
 (TODO:expand on this explanation)
 
-GEC serves to analyze omics data between two conditions or time points. Such comparison is referred to as case vs control. GEC will determine genes or proteins that fall under different categories:
+GeCCo serves to analyze omics data between two conditions or time points. Such comparison is referred to as case vs control. GeCCo will determine genes or proteins that fall under different categories:
 (TODO: This mapping is outdated see `renmane_classes(classified_df)` in `__main__.py`
 - control_overexpressed (highly-expressed)
 - case_overexpressed (lowly-expressed)
@@ -11,10 +12,10 @@ GEC serves to analyze omics data between two conditions or time points. Such com
 - case_upregulated (down-regulated)
 - changed_regulation
 - no_change
-Additionally, GEC will perform network co-expression analysis and produce several files ready for analysis in [Cytoscape](https://cytoscape.org/).
+Additionally, GeCCo will perform network co-expression analysis and produce several files ready for analysis in [Cytoscape](https://cytoscape.org/).
 
 ## Preliminary notes
-GEC is a python program with a command line interface so that you can get things done efficiently. The commands below are intended for a unix-like OS (MacOS, *BSD, GNU/Linux), if you are on Windows you can use a variety of emulation options (e.g., Windows Subsystem for Linux, Cygwin, Virtualbox) to reproduce a linux command line environment or simply use the Windows command line, which may require some adjustments (If you choose to use Windows directly check out how to run python programs, one option is the [Anaconda Prompt](https://www.anaconda.com/distribution/))
+GeCCo is a python program with a command line interface so that you can get things done efficiently. The commands below are intended for a unix-like OS (MacOS, *BSD, GNU/Linux), if you are on Windows you can use a variety of emulation options (e.g., Windows Subsystem for Linux, Cygwin, Virtualbox) to reproduce a linux command line environment or simply use the Windows command line, which may require some adjustments (If you choose to use Windows directly check out how to run python programs, one option is the [Anaconda Prompt](https://www.anaconda.com/distribution/))
 
 ## Installation
 1. Clone the repository or download the zip file.
@@ -39,7 +40,7 @@ GEC is a python program with a command line interface so that you can get things
 
     :warning: The transcript per million (tpm) data provided in any of the input files must not be log transformed. :warning:
 
-    The file `header_map.csv` keeps tracks of the original data headers but it is currently not used by GEC.
+    The file `header_map.csv` keeps tracks of the original data headers but it is currently not used by GeCCo.
 
 2. Open the command line(for Windows the Anacondas Prompt is recommended) and execute:
     ~~~
