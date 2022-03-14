@@ -1,10 +1,9 @@
-# Gene expression classifier (GeCCo)
+# Gene Coexpression Connectivity (GeCCo)
+# Note: GeCCo is previously named as Gene Expression Classifier (GEC)
 
 ## What is GeCCo
-(TODO:expand on this explanation)
 
 GeCCo serves to analyze omics data between two conditions or time points. Such comparison is referred to as case vs control. GeCCo will determine genes or proteins that fall under different categories:
-(TODO: This mapping is outdated see `renmane_classes(classified_df)` in `__main__.py`
 - control_overexpressed (highly-expressed)
 - case_overexpressed (lowly-expressed)
 - control_upregulated (up-regulated)
@@ -18,7 +17,7 @@ GeCCo is a python program with a command line interface so that you can get thin
 
 ## Installation
 1. Clone the repository or download the zip file.
-2. Install the python package: `pip install -e gecco`
+2. Install the python package: `pip install -e GeCCo`
 
 ## Usage
 1. Create a _problem directory_ with the following files in an input subdirectory:
