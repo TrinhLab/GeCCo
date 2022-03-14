@@ -1,14 +1,14 @@
 """
-Gene Expression Classifier (GEC)
+Gene Expression Classifier (GeCCo)
 
 Command line interface
 """
 
 
 import argparse
-from gec.classifier import find_classes, to_numeric
-import gec.settings as settings
-from gec.coexpression import *
+from gecco.classifier import find_classes, to_numeric
+import gecco.settings as settings
+from gecco.coexpression import *
 import os
 import sys
 import pandas as pd
@@ -30,7 +30,7 @@ def cli(args_=None):
         args_ = sys.argv[1:]
 
     # Parse input
-    parser = argparse.ArgumentParser(description='Gene Expression Classifier (GEC)', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser = argparse.ArgumentParser(description='Gene Expression Classifier (GeCCo)', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('problem_dir', help='Path to problem directory')
     parser.add_argument('--write_scores', help='Writes folds changes and Z-scores to a file names scores.csv in the problem directory', default=d_write_scores, choices=[True, False], type=lambda x: (str(x).lower() == 'true'))
     parser.add_argument('-v','--verbose_level', choices=[0,1,2], default=d_verbose_level,
@@ -70,7 +70,7 @@ def core(problem_dir, parameters_path=d_parameters_path, write_scores=d_write_sc
     input_dir = os.path.join(problem_dir,'input')
 
     param_dict = load_params(parameters_path, cli_args)
-    # Apply gec
+    # Apply gecco
     if verbose_level >= 1:
         print('Classifying genes...', end='')
     tpm_file_path = os.path.join(input_dir, 'tpm.csv')

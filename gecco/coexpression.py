@@ -3,7 +3,7 @@ Methods to connects gene classification with co-expression network.
 """
 
 import networkx as nx
-import gec.settings
+import gecco.settings
 import pandas as pd
 import os
 
@@ -26,7 +26,7 @@ def add_centrality_metrics(g):
     nx.set_node_attributes(g, ec, 'centrality_eigenvector_weighted')
 
 
-def add_node_visualization_attributes(g, param_dir=gec.settings.DEFAULT_V_PARAM_DIR):
+def add_node_visualization_attributes(g, param_dir=gecco.settings.DEFAULT_V_PARAM_DIR):
     """
     Adds node attributes that can be used with cytoscape "passthrough" mapping to quickly generate visually appealing networks.
 

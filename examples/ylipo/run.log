@@ -2,28 +2,28 @@ Classifying genes...Done
 Gene features included
 Coexpression network analysis in progress...Done
 Output files written to:
-	 /home/sg/wrk/s/gec/examples/ylipo/1_WTIL_WTnoIL/gene_attributes.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/1_WTIL_WTnoIL/gene_attributes.csv
 Output files written to:
-	 /home/sg/wrk/s/gec/examples/ylipo/1_WTIL_WTnoIL/positive_network.csv
-	 /home/sg/wrk/s/gec/examples/ylipo/1_WTIL_WTnoIL/negative_network.csv
-	 /home/sg/wrk/s/gec/examples/ylipo/1_WTIL_WTnoIL/scores.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/1_WTIL_WTnoIL/positive_network.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/1_WTIL_WTnoIL/negative_network.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/1_WTIL_WTnoIL/scores.csv
 Classifying genes...Done
 Gene features included
 Coexpression network analysis in progress...Done
 Output files written to:
-	 /home/sg/wrk/s/gec/examples/ylipo/2_MTIL_MTnoIL/gene_attributes.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/2_MTIL_MTnoIL/gene_attributes.csv
 Output files written to:
-	 /home/sg/wrk/s/gec/examples/ylipo/2_MTIL_MTnoIL/positive_network.csv
-	 /home/sg/wrk/s/gec/examples/ylipo/2_MTIL_MTnoIL/negative_network.csv
-	 /home/sg/wrk/s/gec/examples/ylipo/2_MTIL_MTnoIL/scores.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/2_MTIL_MTnoIL/positive_network.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/2_MTIL_MTnoIL/negative_network.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/2_MTIL_MTnoIL/scores.csv
 Classifying genes...Done
 Gene features included
 Coexpression network analysis in progress...Classifying genes...Done
 Gene features included
 Coexpression network analysis in progress...Done
 Output files written to:
-	 /home/sg/wrk/s/gec/examples/ylipo/4_WTIL_MTIL/gene_attributes.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/4_WTIL_MTIL/gene_attributes.csv
 Output files written to:
-	 /home/sg/wrk/s/gec/examples/ylipo/4_WTIL_MTIL/positive_network.csv
-	 /home/sg/wrk/s/gec/examples/ylipo/4_WTIL_MTIL/negative_network.csv
-	 /home/sg/wrk/s/gec/examples/ylipo/4_WTIL_MTIL/scores.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/4_WTIL_MTIL/positive_network.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/4_WTIL_MTIL/negative_network.csv
+	 /home/sg/wrk/s/gecco/examples/ylipo/4_WTIL_MTIL/scores.csv

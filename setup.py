@@ -1,12 +1,12 @@
 from setuptools import setup
 
-setup(name='GEC',
+setup(name='GeCCo',
       version='0.1.0',
       author=['Sergio Garcia', 'Caleb Walker'],
-      packages=['gec'],
+      packages=['geccoco'],
       entry_points={
           'console_scripts': [
-              'gec = gec.__main__:cli'
+              'geccoco = geccoco.__main__:cli'
           ]
       },
       )
