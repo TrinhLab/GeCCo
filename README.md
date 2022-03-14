@@ -4,6 +4,7 @@
 ## What is GeCCo
 
 GeCCo serves to analyze omics data between two conditions or time points. Such comparison is referred to as case vs control. GeCCo will determine genes or proteins that fall under different categories:
+
 - control_overexpressed (highly-expressed)
 - case_overexpressed (lowly-expressed)
 - control_upregulated (up-regulated)
@@ -18,6 +19,7 @@ GeCCo is a python program with a command line interface so that you can get thin
 ## Installation
 1. Clone the repository or download the zip file.
 2. Install the python package: `pip install -e GeCCo`
+
 
 ## Usage
 1. Create a _problem directory_ with the following files in an input subdirectory:
