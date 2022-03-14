@@ -1,11 +1,10 @@
 # Gene Coexpression Connectivity (GeCCo)
-# Note: GeCCo is previously named as Gene expression classifier (GEC)
+# Note: GeCCo is previously named as Gene Expression Classifier (GEC)
 
-## What is GeCCo?
-(TODO:expand on this explanation)
+## What is GeCCo
 
 GeCCo serves to analyze omics data between two conditions or time points. Such comparison is referred to as case vs control. GeCCo will determine genes or proteins that fall under different categories:
-(TODO: This mapping is outdated see `renmane_classes(classified_df)` in `__main__.py`
+
 - control_overexpressed (highly-expressed)
 - case_overexpressed (lowly-expressed)
 - control_upregulated (up-regulated)
@@ -19,8 +18,8 @@ GeCCo is a python program with a command line interface so that you can get thin
 
 ## Installation
 1. Clone the repository or download the zip file.
-2. Install the python package: `pip install -e gec`
-3. Install the package dependencies: `pip install -r requirements.txt`
+2. Install the python package: `pip install -e GeCCo`
+
 
 ## Usage
 1. Create a _problem directory_ with the following files in an input subdirectory:
@@ -44,15 +43,15 @@ GeCCo is a python program with a command line interface so that you can get thin
 
 2. Open the command line(for Windows the Anacondas Prompt is recommended) and execute:
     ~~~
-    gec <problem_directory>
+    gecco <problem_directory>
     ~~~
     where `<problem_directory>` is the path to the problem you would like to run. For example, to run problem p1 execute:
     ~~~
-    gec gec/problems/p1
+    gecco gecco/problems/p1
     ~~~
     Then your output figures and cytoscape input will be saved in your problem directory.
 
     To explore additional options execute
     ~~~
-    gec --help
+    gecco --help
     ~~~

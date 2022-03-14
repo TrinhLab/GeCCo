@@ -1,0 +1,36 @@
+Classifying genes...Done
+Gene features included
+Coexpression network analysis in progress...Done
+Output files written to:
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/1_WTIL_WTnoIL_DD/gene_attributes.csv
+Output files written to:
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/1_WTIL_WTnoIL_DD/positive_network.csv
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/1_WTIL_WTnoIL_DD/negative_network.csv
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/1_WTIL_WTnoIL_DD/scores.csv
+Classifying genes...Done
+Gene features included
+Coexpression network analysis in progress...Done
+Output files written to:
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/2_MTIL_MTnoIL_DD/gene_attributes.csv
+Output files written to:
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/2_MTIL_MTnoIL_DD/positive_network.csv
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/2_MTIL_MTnoIL_DD/negative_network.csv
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/2_MTIL_MTnoIL_DD/scores.csv
+Classifying genes...Done
+Gene features included
+Coexpression network analysis in progress...Done
+Output files written to:
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/3_MTnoIL_WTnoIL_DD/gene_attributes.csv
+Output files written to:
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/3_MTnoIL_WTnoIL_DD/positive_network.csv
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/3_MTnoIL_WTnoIL_DD/negative_network.csv
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/3_MTnoIL_WTnoIL_DD/scores.csv
+Classifying genes...Done
+Gene features included
+Coexpression network analysis in progress...Done
+Output files written to:
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/4_WTIL_MTIL_DD/gene_attributes.csv
+Output files written to:
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/4_WTIL_MTIL_DD/positive_network.csv
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/4_WTIL_MTIL_DD/negative_network.csv
+	 /home/ddooley/bioinformatics_packages/GeCCo/examples/gecco_publication/4_WTIL_MTIL_DD/scores.csv

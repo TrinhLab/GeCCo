@@ -6,7 +6,7 @@ import re
 
 def find_classes(tpm_file_path, param_dict, remove_no_change=True):
     """ Assign classes to each gene based on decision tree.
-    :param tpm_file_path: Path to csv file formated for gec.
+    :param tpm_file_path: Path to csv file formated for gecco.
     :param param_dict: Paramter dictionary
     :param remove_no_change: If true removes genes classified as no_change from the output (Default is True).
     :return: classified_df, cdf. Where classified_df contains gene ids and their associated categories and cdf contains the classificaiton variables (z-scores, and fold changes)
